@@ -31,6 +31,7 @@ Equation *parseEquation(const char *str)
 	// Allocate memory for the equation and steps.
 	// Note, memory allocation for the parameter list is handled in parseEquationStep.
 	Equation *eq = calloc(1, sizeof(Equation));
+	eq->step_count = equation_steps;
 	eq->steps = calloc(equation_steps, sizeof(EquationStep));
 
 
@@ -242,14 +243,15 @@ static int parseEquationStep(const char *str, Equation *eq, size_t *offset, char
 
 void freeEquation(Equation* eq)
 {
-	// Fix compiler warning before the function is implemented
-	if (eq->step_count < 1)
-	{
-		fprintf(stderr, "Whaaa???\n");
+	printf ("%lu\n", eq->step_count);
+	for (size_t i = 0; i < eq->step_count; i++) {
+		free(eq->steps[i].params);
+		free(eq->steps[i].parameter_values);
 	}
-	// TODO: Implement
-	// Will run properly without implementation, but it should be implemented to avoid
-	// memory leaks.
+
+	free(eq->variables);
+	free(eq->steps);
+	free(eq);
 }
 
 double executeEquation(Equation *eq, double *variables, size_t num_vars)

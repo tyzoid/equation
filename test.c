@@ -25,5 +25,9 @@ int main(int argc, char **argv)
 
 	printf("Result: %9.7lf\n", executeEquation(eq, vars, argc-2));
 
+	freeEquation(eq);
+	free(vars);
+	eq = 0;
+
 	return 0;
 }
