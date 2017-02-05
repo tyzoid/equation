@@ -243,7 +243,6 @@ static int parseEquationStep(const char *str, Equation *eq, size_t *offset, char
 
 void freeEquation(Equation* eq)
 {
-	printf ("%lu\n", eq->step_count);
 	for (size_t i = 0; i < eq->step_count; i++) {
 		free(eq->steps[i].params);
 		free(eq->steps[i].parameter_values);
